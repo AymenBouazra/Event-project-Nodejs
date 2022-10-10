@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const port = process.env.PORT || 4000;
 const bodyParser = require('body-parser')
+const dotenv = require('dotenv');
+dotenv.config()
 require('./database/connect')
 app.use(cors());
 app.use(morgan('dev'));
