@@ -15,8 +15,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 //routes
-const company = require('./routes/Auth.api')
-app.use('/app/v1', company)
+const Auth = require('./routes/Auth.api')
+const Company = require('./routes/company.api')
+app.use('/app/v1', Auth)
+app.use('/app/v1', Company)
 
 app.listen(port,()=> {
     console.log('App is listening on port '+port);
