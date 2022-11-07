@@ -1,12 +1,14 @@
 const passport = require('passport')
-const BearerStrategy = require('passport-http-bearer').Strategy()
+const BearerStrategy = require('passport-http-bearer').Strategy
 const jwt = require('jsonwebtoken');
 const Company = require('../models/company')
 
 passport.use(new BearerStrategy(
     (token, done) => {
+        if (token==='null') {
+            return ;
+        }
         const decodedData = jwt.verify(token, process.env.JWT_SECRET);
-        console.log(decodedData);
         Company.findById(decodedData.companyId, (err, user) => {
             if (err) { return done(err); }
             if (!user) { return done(null, false); }

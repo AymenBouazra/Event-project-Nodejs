@@ -5,6 +5,7 @@ const cors = require('cors');
 const port = process.env.PORT || 4000;
 const bodyParser = require('body-parser')
 const dotenv = require('dotenv');
+require('./middlewares/bearer')
 dotenv.config()
 require('./database/connect')
 app.use(cors());

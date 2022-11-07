@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
                     const createdToken = jwt.sign(data, process.env.JWT_SECRET, { expiresIn: '1d' })
                     res.status(200).send({ message: 'Connected successfully!', token: createdToken })
                 } else {
-                    res.status(400).json({ message: 'Email or password incorrect.' })
+                    res.status(400).json({ message: 'Email or password incorrect.adsdas' })
                 }
             }
             )
