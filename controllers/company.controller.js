@@ -6,7 +6,7 @@ exports.getAllCompanies = async (req, res) => {
         const company = await Company.find({})
         res.send(company)
     } catch (error) {
-        res.status(500).send({ message: 'Server error!' })
+        res.status(500).send({ message: error.message ||  'Server error!' })
     }
 }
 
