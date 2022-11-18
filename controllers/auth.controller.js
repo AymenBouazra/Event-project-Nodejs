@@ -14,7 +14,7 @@ exports.login = async (req, res) => {
                         companyId: companyFound._id,
                         role: companyFound.role
                     }
-                    const createdToken = jwt.sign(data, process.env.JWT_SECRET, { expiresIn: '1d' })
+                    const createdToken = jwt.sign(data, process.env.JWT_SECRET, { expiresIn: '1d'})
                     res.status(200).send({ message: 'Connected successfully!', token: createdToken })
                 } else {
                     res.status(400).json({ message: 'Email or password incorrect.adsdas' })
@@ -116,3 +116,14 @@ exports.resetPassword = async (req, res) => {
         res.status(500).json({ message: 'error server' })
     }
 }
+
+exports.logout = async (req, res, next) => {
+
+    req.logout((err) => {
+        if (err) {
+            return next(err)
+        }
+        res.json({ message: "Vous êtes déconnecté avec succès." })
+    }); // Invoking logout() will remove the req.user property and clear the login session (if any).
+
+};

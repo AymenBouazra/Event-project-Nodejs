@@ -4,11 +4,11 @@ const { getAllCompanies, getCompanyById, createCompany, updateCompany, deleteCom
 const router = express.Router();
 
 
-router.get('/company', passport.authenticate("bearer", { session: false }),getAllCompanies)
-router.get('/company/:id', passport.authenticate("bearer", { session: false }),getCompanyById)
-router.post('/company', passport.authenticate("bearer", { session: false }),createCompany)
-router.put('/company/:id', passport.authenticate("bearer", { session: false }),updateCompany)
-router.delete('/company/:id', passport.authenticate("bearer", { session: false }),deleteCompany)
+router.get('/company', passport.authenticate("bearer", { session: false }), getAllCompanies)
+router.get('/company/:id', passport.authenticate("bearer", { session: false }), getCompanyById)
+router.post('/company', passport.authenticate("bearer", { session: false }), createCompany)
+router.put('/company/:id', passport.authenticate("bearer", { session: false }), updateCompany)
+router.delete('/company/:id', passport.authenticate("bearer", { session: false }), deleteCompany)
 
 
 module.exports = router
