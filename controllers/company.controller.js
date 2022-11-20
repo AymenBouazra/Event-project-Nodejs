@@ -6,13 +6,13 @@ exports.getAllCompanies = async (req, res) => {
         const company = await Company.find({})
         res.send(company)
     } catch (error) {
-        res.status(500).send({ message: error.message ||  'Server error!' })
+        res.status(500).send({ message: error.message || 'Server error!' })
     }
 }
 
 exports.getCompanyById = async (req, res) => {
     try {
-        const company = await Company.findById(req.params.id)
+        const company = await Company.findById(req.params.id, { password: 0 })
         res.send(company)
     } catch (error) {
         res.status(500).send({ message: 'Server error!' })
@@ -42,8 +42,20 @@ exports.createCompany = async (req, res) => {
 
 exports.updateCompany = async (req, res) => {
     try {
-        await Company.findByIdAndUpdate(req.params.id, req.body)
-        res.send({ message: 'Updated successfully' })
+        if (req.body.password) {
+            const saltRounds = bcrypt.genSaltSync(10);
+            bcrypt.hash(req.body.password, saltRounds, async (error, hash) => {
+                if (error) {
+                    res.status(400).json({ message: 'Error occured' })
+                }
+                req.body.password = hash
+                await Company.findByIdAndUpdate(req.params.id, req.body)
+                res.send({ message: 'User updated successfully!' });
+            })
+        } else {
+            await Company.findByIdAndUpdate(req.params.id, req.body)
+            res.send({ message: 'User updated successfully!' });
+        }
     } catch (error) {
         res.status(500).send({ message: 'Server error!' })
     }

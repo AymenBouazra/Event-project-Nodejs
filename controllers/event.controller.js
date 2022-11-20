@@ -29,8 +29,15 @@ exports.getEventById = async (req,res) => {
 
 exports.updateEventById = async (req,res) => {
     try {
-        await Event.findByIdAndUpdate(req.params.id, req.body)
-        res.send({message:'Event updated successfully!'})
+        if (req.body.password = "") {
+            const event = await Event.findById(req.params.id)
+            req.body.password = event.password
+            await Event.findByIdAndUpdate(req.params.id, req.body)
+            res.send({message:'Event updated successfully!'})
+        } else {
+            await Event.findByIdAndUpdate(req.params.id, req.body)
+            res.send({message:'Event updated successfully!'})
+        }
     } catch (error) {
         res.status(500).send({message: error.message || 'Server error'})
     }

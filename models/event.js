@@ -8,7 +8,7 @@ const EventSchema = new Schema(
         eventDate: String,
         eventTime: String,
         photo: String,
-        price: String,
+        price: Number,
         availableTicketNumber: Number,
         eventType: String,
         location: String,
