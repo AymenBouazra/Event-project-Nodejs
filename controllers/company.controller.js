@@ -32,7 +32,7 @@ exports.createCompany = async (req, res) => {
                 }
                 req.body.password = hash
                 await Company.create(req.body);
-                res.send({ message: 'User registered successfully!' });
+                res.send({ message: 'Company registered successfully!' });
             })
         }
     } catch (error) {
@@ -50,11 +50,11 @@ exports.updateCompany = async (req, res) => {
                 }
                 req.body.password = hash
                 await Company.findByIdAndUpdate(req.params.id, req.body)
-                res.send({ message: 'User updated successfully!' });
+                res.send({ message: 'Company updated successfully!' });
             })
         } else {
             await Company.findByIdAndUpdate(req.params.id, req.body)
-            res.send({ message: 'User updated successfully!' });
+            res.send({ message: 'Company updated successfully!' });
         }
     } catch (error) {
         res.status(500).send({ message: 'Server error!' })
@@ -64,7 +64,7 @@ exports.updateCompany = async (req, res) => {
 exports.deleteCompany = async (req, res) => {
     try {
         await Company.findByIdAndRemove(req.params.id)
-        res.send({ message: 'Delete successfully' })
+        res.send({ message: 'Company deleted successfully!' })
     } catch (error) {
         res.status(500).send({ message: 'Server error!' })
     }

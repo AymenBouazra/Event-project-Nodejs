@@ -4,6 +4,7 @@ exports.createEvent = async (req,res) => {
     try {
         const event = await Event.create(req.body)
         await Company.findByIdAndUpdate(req.user._id,{$push : {events:event._id}},{new:true})
+        await Event.findByIdAndUpdate(event._id,{company:req.user._id},{new:true})
         res.send({message:'Event created successfully!'})
     } catch (error) {
         res.status(500).send({message: error.message || 'Server error'})
