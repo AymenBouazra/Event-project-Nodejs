@@ -5,9 +5,6 @@ const Company = require('../models/company')
 
 passport.use(new BearerStrategy(
     (token, done) => {
-        if (token==='null') {
-            return ;
-        }
         const decodedData = jwt.verify(token, process.env.JWT_SECRET);
         Company.findById(decodedData.companyId, (err, user) => {
             if (err) { return done(err); }

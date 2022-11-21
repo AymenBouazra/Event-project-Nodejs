@@ -1,8 +1,9 @@
 const Event = require('../models/event');
-
+const Company = require('../models/company')
 exports.createEvent = async (req,res) => {
     try {
-        await Event.create(req.body)
+        const event = await Event.create(req.body)
+        await Company.findByIdAndUpdate(req.user._id,{$push : {events:event._id}},{new:true})
         res.send({message:'Event created successfully!'})
     } catch (error) {
         res.status(500).send({message: error.message || 'Server error'})
