@@ -45,3 +45,16 @@ exports.deleteTagById = async (req, res) => {
         res.status(500).send({ message: error.message || 'Server error' })
     }
 }
+
+exports.getAllTagsWithNewForm = async (req, res) => {
+    try {
+        const tags = await Tag.find()
+        let newFormTags = []
+        tags.map(tag=>{
+            newFormTags.push({label:tag.title,value:tag._id})
+        })
+        res.send(newFormTags)
+    } catch (error) {
+        res.status(500).send({ message: error.message || 'Server error' })
+    }
+}

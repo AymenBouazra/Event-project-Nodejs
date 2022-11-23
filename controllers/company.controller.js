@@ -36,7 +36,8 @@ exports.createCompany = async (req, res) => {
             })
         }
     } catch (error) {
-        res.status(500).send({ message: 'Server error!' })
+        console.log(error);
+        res.status(500).send({ message: error.message || 'Server error!' })
     }
 }
 

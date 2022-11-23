@@ -24,9 +24,11 @@ app.use(passport.session());
 const Auth = require('./routes/Auth.api')
 const Company = require('./routes/company.api')
 const Event = require('./routes/event.api');
+const Tag = require('./routes/tag.api');
 app.use('/app/v1', Auth)
 app.use('/app/v1', Company)
 app.use('/app/v1', Event)
+app.use('/app/v1', Tag)
 
 app.listen(port,()=> {
     console.log('App is listening on port '+port);
