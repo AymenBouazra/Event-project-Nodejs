@@ -41,7 +41,6 @@ exports.updateEventById = async (req, res) => {
             return newTags.push(tag.value)
         })
         req.body.tags = newTags
-        console.log(req.body);
         await Event.findByIdAndUpdate(req.params.id, req.body)
         res.send({ message: 'Event updated successfully!' })
 
